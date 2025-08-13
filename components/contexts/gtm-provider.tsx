@@ -12,7 +12,7 @@ export function GTMProvider({ children }: { children: React.ReactNode }) {
 
     try {
       TagManager.initialize({ gtmId });
-    } catch (error) {
+    } catch {
       // Silently ignore GTM initialization errors in dev
     }
   }, []);
