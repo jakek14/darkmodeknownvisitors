@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/contexts/theme-provider";
+import { GTMProvider } from "@/components/contexts/gtm-provider";
 import { inter } from "@/lib/fonts";
 
 import { siteConfig } from "../config/site";
@@ -70,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }} className="dark" data-theme="dark">
+    <html suppressHydrationWarning lang="en" style={{ colorScheme: "dark" }} className="dark" data-theme="dark">
       <head>
         <meta property="og:image" content="/Logos_KV-Logo-Square-GreenBG.png" />
         <meta property="og:image:width" content="1200" />
@@ -84,7 +85,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon-precomposed" href="/Logos_KV-Logo-Square-GreenBG.png" />
       </head>
       <body className={`${inter.className} bg-background antialiased dark:bg-background dark:text-foreground`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <GTMProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </GTMProvider>
       </body>
     </html>
   );
