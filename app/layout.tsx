@@ -88,6 +88,16 @@ export default function RootLayout({
       </head>
       {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       <body className={`${inter.className} bg-background antialiased dark:bg-background dark:text-foreground`}>
+        {gtmId ? (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        ) : null}
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
