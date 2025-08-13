@@ -3,10 +3,10 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/contexts/theme-provider";
-import { GTMProvider } from "@/components/contexts/gtm-provider";
 import { inter } from "@/lib/fonts";
 
 import { siteConfig } from "../config/site";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: {
@@ -70,6 +70,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+
   return (
     <html suppressHydrationWarning lang="en" style={{ colorScheme: "dark" }} className="dark" data-theme="dark">
       <head>
@@ -84,10 +86,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/Logos_KV-Logo-Square-GreenBG.png" />
         <link rel="apple-touch-icon-precomposed" href="/Logos_KV-Logo-Square-GreenBG.png" />
       </head>
+      {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       <body className={`${inter.className} bg-background antialiased dark:bg-background dark:text-foreground`}>
-        <GTMProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </GTMProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
