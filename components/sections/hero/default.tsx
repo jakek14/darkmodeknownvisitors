@@ -28,6 +28,22 @@ interface HeroProps {
   className?: string;
 }
 
+type LeadSubmissionEvent = {
+  event: string;
+  form_id: string;
+  email: string;
+  response_status: number;
+  response_status_text: string;
+  page_location: string;
+  page_path: string;
+  page_title: string;
+  timestamp: string;
+};
+
+interface WindowWithDataLayer extends Window {
+  dataLayer?: LeadSubmissionEvent[];
+}
+
 export default function Hero({
   mockup = <HeroMemberList />,
   badge = false,
@@ -81,8 +97,8 @@ export default function Hero({
         
         try {
           if (typeof window !== "undefined") {
-            const w = window as any;
-            w.dataLayer = w.dataLayer || [];
+            const w = window as WindowWithDataLayer;
+            w.dataLayer = w.dataLayer ?? [];
             w.dataLayer.push({
               event: 'lead_submission',
               form_id: 'hero_waitlist',
