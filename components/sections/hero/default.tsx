@@ -56,11 +56,10 @@ export default function Hero({
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isValidEmail = (value: string) => {
-    const atIndex = value.indexOf("@");
-    if (atIndex <= 0) return false;
-    const domain = value.slice(atIndex + 1);
-    if (!domain || domain.indexOf(".") === -1) return false;
-    return true;
+    const v = value.trim();
+    // Basic validation: requires one "@" and at least one "." after the "@"
+    // Example: something@domain.tld
+    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
   };
 
   const handleEmailSubmit = async () => {
@@ -200,6 +199,10 @@ export default function Hero({
               onChange={(e) => setEmail(e.target.value)}
               onKeyPress={handleKeyPress}
               disabled={isSubmitting || isSubmitted}
+              required
+              inputMode="email"
+              autoComplete="email"
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
               className="flex-1 px-4 py-3 bg-background/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#1da84f]/50 focus:border-[#1da84f] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/20 disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <Button
