@@ -65,7 +65,8 @@ export default function Hero({
 
   const handleEmailSubmit = async () => {
     if (isSubmitting) return;
-    if (!isValidEmail(email)) {
+    const submittedEmail = email.trim();
+    if (!isValidEmail(submittedEmail)) {
       setButtonText("Enter a valid email");
       setTimeout(() => {
         setButtonText("Join the Waitlist");
@@ -84,7 +85,7 @@ export default function Hero({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email
+          email: submittedEmail
         }),
       });
 
@@ -102,7 +103,7 @@ export default function Hero({
             w.dataLayer.push({
               event: 'lead_submission',
               form_id: 'hero_waitlist',
-              email: email,
+              email: submittedEmail,
               response_status: response.status,
               response_status_text: response.statusText,
               page_location: window.location.href,
