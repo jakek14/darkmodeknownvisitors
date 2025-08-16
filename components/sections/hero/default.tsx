@@ -149,11 +149,7 @@ export default function Hero({
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleEmailSubmit();
-    }
-  };
+  // Form submission is handled via onSubmit to ensure consistent validation on Enter or click
 
   return (
     <Section
@@ -191,13 +187,19 @@ export default function Hero({
             KnownVisitors identifies your anonymous website visitors even if they never filled out a form.
           </p>
           {/* Email Input and Waitlist Button */}
-          <div className="animate-appear relative z-10 flex flex-col sm:flex-row gap-4 max-w-md w-full opacity-0 delay-300">
+          <form
+            className="animate-appear relative z-10 flex flex-col sm:flex-row gap-4 max-w-md w-full opacity-0 delay-300"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!isValidEmail(email)) return;
+              handleEmailSubmit();
+            }}
+          >
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onKeyPress={handleKeyPress}
               disabled={isSubmitting || isSubmitted}
               required
               inputMode="email"
@@ -206,9 +208,9 @@ export default function Hero({
               className="flex-1 px-4 py-3 bg-background/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#1da84f]/50 focus:border-[#1da84f] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/20 disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <Button
+              type="submit"
               variant="default"
               size="lg"
-              onClick={handleEmailSubmit}
               disabled={isSubmitting || isSubmitted || !email || !isValidEmail(email)}
               className={`transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/30 transform ${
                 isSubmitted 
@@ -218,7 +220,7 @@ export default function Hero({
             >
               {isSubmitting ? "Submitting..." : buttonText}
             </Button>
-          </div>
+          </form>
           {mockup !== false && (
             <div className="relative w-full pt-8">
               <MockupFrame
