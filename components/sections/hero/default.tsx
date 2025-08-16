@@ -39,8 +39,23 @@ export default function Hero({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const isValidEmail = (value: string) => {
+    const atIndex = value.indexOf("@");
+    if (atIndex <= 0) return false;
+    const domain = value.slice(atIndex + 1);
+    if (!domain || domain.indexOf(".") === -1) return false;
+    return true;
+  };
+
   const handleEmailSubmit = async () => {
-    if (!email || isSubmitting) return;
+    if (isSubmitting) return;
+    if (!isValidEmail(email)) {
+      setButtonText("Enter a valid email");
+      setTimeout(() => {
+        setButtonText("Join the Waitlist");
+      }, 2000);
+      return;
+    }
 
     setIsSubmitting(true);
     
@@ -63,6 +78,24 @@ export default function Hero({
       if (response.ok) {
         const responseText = await response.text();
         console.log('Response body:', responseText);
+        
+        try {
+          if (typeof window !== "undefined") {
+            const w = window as any;
+            w.dataLayer = w.dataLayer || [];
+            w.dataLayer.push({
+              event: 'lead_submission',
+              form_id: 'hero_waitlist',
+              email: email,
+              response_status: response.status,
+              response_status_text: response.statusText,
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              page_title: document.title,
+              timestamp: new Date().toISOString(),
+            });
+          }
+        } catch {}
         
         setButtonText("Thank you!");
         setIsSubmitted(true);
@@ -156,12 +189,12 @@ export default function Hero({
               variant="default"
               size="lg"
               onClick={handleEmailSubmit}
-              disabled={isSubmitting || isSubmitted || !email}
+              disabled={isSubmitting || isSubmitted || !email || !isValidEmail(email)}
               className={`transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/30 transform ${
                 isSubmitted 
                   ? "bg-green-600 hover:bg-green-700 text-white" 
                   : "bg-[#1da84f] hover:bg-[#1da84f]/90 text-white"
-              } ${(isSubmitting || isSubmitted || !email) ? "opacity-50 cursor-not-allowed" : ""}`}
+              } ${(isSubmitting || isSubmitted || !email || !isValidEmail(email)) ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {isSubmitting ? "Submitting..." : buttonText}
             </Button>
