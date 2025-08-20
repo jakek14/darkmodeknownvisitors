@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion";
+import * as React from "react";
+import { motion, useInView } from "framer-motion";
 import BentoGridDemo from "../../bento-grid-demo";
 import { Section } from "../../ui/section";
 import { cn } from "@/lib/utils";
@@ -38,15 +39,17 @@ export default function BentoGridSection({
   description = "Discover what makes KnownVisitors the ultimate visitor identification platform",
   className,
 }: BentoGridSectionProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { amount: 0.05, once: true })
   return (
     <Section className={cn("px-0 py-6 sm:py-12 md:py-16", className)}>
       <div className="w-full max-w-[100vw] overflow-x-hidden">
         <motion.div 
+          ref={containerRef}
           className="max-w-container mx-auto flex flex-col items-center gap-6 sm:gap-20"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          animate={isInView ? "visible" : "hidden"}
         >
         <motion.div 
           className="text-center"

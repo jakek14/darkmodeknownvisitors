@@ -28,6 +28,22 @@ interface HeroProps {
   className?: string;
 }
 
+type LeadSubmissionEvent = {
+  event: string;
+  form_id: string;
+  email: string;
+  response_status: number;
+  response_status_text: string;
+  page_location: string;
+  page_path: string;
+  page_title: string;
+  timestamp: string;
+};
+
+interface WindowWithDataLayer extends Window {
+  dataLayer?: LeadSubmissionEvent[];
+}
+
 export default function Hero({
   mockup = <HeroMemberList />,
   badge = false,
@@ -39,8 +55,23 @@ export default function Hero({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const isValidEmail = (value: string) => {
+    const v = value.trim();
+    // Basic validation: requires one "@" and at least one "." after the "@"
+    // Example: something@domain.tld
+    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+  };
+
   const handleEmailSubmit = async () => {
-    if (!email || isSubmitting) return;
+    if (isSubmitting) return;
+    const submittedEmail = email.trim();
+    if (!isValidEmail(submittedEmail)) {
+      setButtonText("Enter a valid email");
+      setTimeout(() => {
+        setButtonText("Join the Waitlist");
+      }, 2000);
+      return;
+    }
 
     setIsSubmitting(true);
     
@@ -53,7 +84,7 @@ export default function Hero({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email
+          email: submittedEmail
         }),
       });
 
@@ -63,6 +94,24 @@ export default function Hero({
       if (response.ok) {
         const responseText = await response.text();
         console.log('Response body:', responseText);
+        
+        try {
+          if (typeof window !== "undefined") {
+            const w = window as WindowWithDataLayer;
+            w.dataLayer = w.dataLayer ?? [];
+            w.dataLayer.push({
+              event: 'lead_submission',
+              form_id: 'hero_waitlist',
+              email: submittedEmail,
+              response_status: response.status,
+              response_status_text: response.statusText,
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              page_title: document.title,
+              timestamp: new Date().toISOString(),
+            });
+          }
+        } catch {}
         
         setButtonText("Thank you!");
         setIsSubmitted(true);
@@ -100,11 +149,7 @@ export default function Hero({
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleEmailSubmit();
-    }
-  };
+  // Form submission is handled via onSubmit to ensure consistent validation on Enter or click
 
   return (
     <Section
@@ -142,30 +187,40 @@ export default function Hero({
             KnownVisitors identifies your anonymous website visitors even if they never filled out a form.
           </p>
           {/* Email Input and Waitlist Button */}
-          <div className="animate-appear relative z-10 flex flex-col sm:flex-row gap-4 max-w-md w-full opacity-0 delay-300">
+          <form
+            className="animate-appear relative z-10 flex flex-col sm:flex-row gap-4 max-w-md w-full opacity-0 delay-300"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!isValidEmail(email)) return;
+              handleEmailSubmit();
+            }}
+          >
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onKeyPress={handleKeyPress}
               disabled={isSubmitting || isSubmitted}
+              required
+              inputMode="email"
+              autoComplete="email"
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
               className="flex-1 px-4 py-3 bg-background/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#1da84f]/50 focus:border-[#1da84f] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/20 disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <Button
+              type="submit"
               variant="default"
               size="lg"
-              onClick={handleEmailSubmit}
-              disabled={isSubmitting || isSubmitted || !email}
+              disabled={isSubmitting || isSubmitted || !email || !isValidEmail(email)}
               className={`transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/30 transform ${
                 isSubmitted 
                   ? "bg-green-600 hover:bg-green-700 text-white" 
                   : "bg-[#1da84f] hover:bg-[#1da84f]/90 text-white"
-              } ${(isSubmitting || isSubmitted || !email) ? "opacity-50 cursor-not-allowed" : ""}`}
+              } ${(isSubmitting || isSubmitted || !email || !isValidEmail(email)) ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {isSubmitting ? "Submitting..." : buttonText}
             </Button>
-          </div>
+          </form>
           {mockup !== false && (
             <div className="relative w-full pt-8">
               <MockupFrame
