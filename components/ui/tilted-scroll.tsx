@@ -17,6 +17,7 @@ export function TiltedScroll({
   className 
 }: TiltedScrollProps) {
   const [scrollPosition, setScrollPosition] = React.useState(0);
+  const [isVisible, setIsVisible] = React.useState(true);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -43,6 +44,20 @@ export function TiltedScroll({
     };
   }, []);
 
+  // Pause animation when scrolled offscreen to reduce jank
+  React.useEffect(() => {
+    const el = containerRef.current?.parentElement?.parentElement;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => setIsVisible(entry.isIntersecting));
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={cn("flex items-center justify-center", className)}>
       <div className="relative overflow-hidden h-[280px] md:h-[320px] w-[280px] md:w-[350px]">
@@ -54,9 +69,9 @@ export function TiltedScroll({
         
         <div 
           ref={containerRef}
-          className="flex flex-col gap-3 md:gap-5"
+          className="flex flex-col gap-3 md:gap-5 will-change-transform"
           style={{
-            transform: `translateY(-${scrollPosition}px)`,
+            transform: `translateY(-${isVisible ? scrollPosition : 0}px)`,
           }}
         >
           {[...items, ...items].map((item, index) => (

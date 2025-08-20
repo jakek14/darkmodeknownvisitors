@@ -1,7 +1,7 @@
 "use client"
 
-import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { ReactNode, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 import Dashboard3D from "../../ui/3d-dashboard";
 import { GlowingEffect } from "../../ui/glowing-effect";
@@ -46,14 +46,18 @@ export default function Items({
   title = "Transform Your Website Visitors Into Revenue",
   className,
 }: ItemsProps) {
+  const [isHoverCard1, setIsHoverCard1] = useState(false)
+  const [isHoverCard2, setIsHoverCard2] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { amount: 0.05, once: true })
   return (
     <Section className={className}>
       <motion.div 
+        ref={containerRef}
         className="max-w-container mx-auto flex flex-col items-center gap-6 sm:gap-8"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        animate={isInView ? "visible" : "hidden"}
       >
         <motion.h2 
           className="max-w-[800px] text-center text-3xl leading-tight font-semibold sm:text-5xl sm:leading-tight"
@@ -62,19 +66,18 @@ export default function Items({
           {title}
         </motion.h2>
         
-        {/* First Card - Text Left, Image Right */}
-        <motion.div 
-          className="relative w-full max-w-6xl glass-3 hover:glass-4 rounded-2xl border border-border/70 dark:border-border/5 dark:border-t-border/15 bg-card p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] transform-gpu mt-16"
-          variants={itemVariants}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.3 }}
+        {/* First Card - Text Left, Image Right (no entry animation) */}
+        <div 
+          className="relative w-full max-w-6xl glass-3 hover:glass-4 rounded-2xl border border-border/70 dark:border-border/5 dark:border-t-border/15 bg-card p-8 shadow-xl transition-all duration-300 hover:shadow-2xl transform-gpu mt-16 will-change-transform"
+          onMouseEnter={() => setIsHoverCard1(true)}
+          onMouseLeave={() => setIsHoverCard1(false)}
         >
           <GlowingEffect
             blur={0}
             borderWidth={3}
             spread={80}
             glow={true}
-            disabled={false}
+            disabled={!isHoverCard1}
             proximity={64}
             inactiveZone={0.01}
           />
@@ -109,21 +112,20 @@ export default function Items({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Second Card - Image Left, Text Right */}
-        <motion.div 
-          className="relative w-full max-w-6xl glass-3 hover:glass-4 rounded-2xl border border-border/70 dark:border-border/5 dark:border-t-border/15 bg-card p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] transform-gpu mt-16"
-          variants={itemVariants}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.3 }}
+        {/* Second Card - Image Left, Text Right (no entry animation) */}
+        <div 
+          className="relative w-full max-w-6xl glass-3 hover:glass-4 rounded-2xl border border-border/70 dark:border-border/5 dark:border-t-border/15 bg-card p-8 shadow-xl transition-all duration-300 hover:shadow-2xl transform-gpu mt-16 will-change-transform"
+          onMouseEnter={() => setIsHoverCard2(true)}
+          onMouseLeave={() => setIsHoverCard2(false)}
         >
           <GlowingEffect
             blur={0}
             borderWidth={3}
             spread={80}
             glow={true}
-            disabled={false}
+            disabled={!isHoverCard2}
             proximity={64}
             inactiveZone={0.01}
           />
@@ -144,7 +146,7 @@ Now you can identify these anonymous browsers and deliver 5x more personalized o
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
         
         {/* Third Card Container - Aligned Left */}
         <motion.div 
@@ -152,7 +154,7 @@ Now you can identify these anonymous browsers and deliver 5x more personalized o
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {/* Third Card - Half Width */}
           <motion.div 
