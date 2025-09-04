@@ -1,20 +1,12 @@
 "use client"
 
-import { Menu } from "lucide-react";
 import { ReactNode, useState } from "react";
 
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 
 import { Button, type ButtonProps } from "../../ui/button";
-import {
-  Navbar as NavbarComponent,
-  NavbarLeft,
-  NavbarRight,
-} from "../../ui/navbar";
-import Navigation from "../../ui/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
+import { Navbar as NavbarComponent } from "../../ui/navbar";
 import { GlowingEffect } from "../../ui/glowing-effect";
 
 interface NavbarLink {
