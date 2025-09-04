@@ -9,11 +9,6 @@ import { Button, type ButtonProps } from "../../ui/button";
 // removed unused NavbarComponent import
 import { GlowingEffect } from "../../ui/glowing-effect";
 
-interface NavbarLink {
-  text: string;
-  href: string;
-}
-
 interface NavbarActionProps {
   text: string;
   href: string;
@@ -27,10 +22,7 @@ interface NavbarProps {
   logo?: ReactNode;
   name?: string;
   homeUrl?: string;
-  mobileLinks?: NavbarLink[];
   actions?: NavbarActionProps[];
-  showNavigation?: boolean;
-  customNavigation?: ReactNode;
   className?: string;
 }
 
@@ -38,10 +30,7 @@ export default function Navbar({
   logo = null,
   name = "",
   homeUrl = "/",
-  mobileLinks = [],
   actions = [],
-  showNavigation = false,
-  customNavigation,
   className,
 }: NavbarProps) {
   const [isHover, setIsHover] = useState(false);
