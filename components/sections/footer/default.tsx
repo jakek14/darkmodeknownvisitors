@@ -31,7 +31,6 @@ interface FooterProps {
 
 export default function FooterSection({
   logo = <DarkModeLogo className="h-[4.5rem] w-auto -mt-3" />,
-  name: _name = "",
   columns = [],
   copyright = "© 2025 KnownVisitors. All rights reserved",
   className,
