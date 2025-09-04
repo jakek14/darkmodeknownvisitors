@@ -9,7 +9,7 @@ export const siteConfig = {
   links: {
     twitter: "https://twitter.com/mikolajdobrucki",
     github: "https://github.com/launch-ui/launch-ui",
-    email: "mailto:contact@mikolajdobrucki.com",
+    email: "mailto:info@knownvisitors.com",
   },
   pricing: {
     pro: "https://launchui.lemonsqueezy.com/buy/b4798c68-c858-4c34-860b-069b5a0d6c4e",
