@@ -38,10 +38,10 @@ export default function Navbar({
   logo = null,
   name = "",
   homeUrl = "/",
-  mobileLinks = [],
+  mobileLinks: _mobileLinks = [],
   actions = [],
-  showNavigation = false,
-  customNavigation,
+  showNavigation: _showNavigation = false,
+  customNavigation: _customNavigation,
   className,
 }: NavbarProps) {
   const [isHover, setIsHover] = useState(false);

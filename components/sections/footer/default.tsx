@@ -31,13 +31,12 @@ interface FooterProps {
 
 export default function FooterSection({
   logo = <DarkModeLogo className="h-[4.5rem] w-auto -mt-3" />,
-  name = "",
+  name: _name = "",
   columns = [],
   copyright = "© 2025 KnownVisitors. All rights reserved",
   className,
 }: FooterProps) {
   const copyrightText = copyright.replace(/^©\s*/, "");
-  const copyrightPrefix = copyrightText.split(" All rights reserved")[0];
   return (
     <footer className={cn("bg-background w-full px-4", className)}>
       <div className="max-w-container mx-auto">
