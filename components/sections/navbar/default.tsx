@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 
 import { Button, type ButtonProps } from "../../ui/button";
-import { Navbar as NavbarComponent } from "../../ui/navbar";
+// removed unused NavbarComponent import
 import { GlowingEffect } from "../../ui/glowing-effect";
 
 interface NavbarLink {
