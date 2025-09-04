@@ -13,7 +13,7 @@ export async function GET() {
     return new Response(JSON.stringify({ text: data.text || "" }), {
       headers: { "content-type": "application/json" },
     });
-  } catch (err) {
+  } catch {
     return new Response(JSON.stringify({ text: "" }), {
       headers: { "content-type": "application/json" },
       status: 200,
