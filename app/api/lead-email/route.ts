@@ -64,12 +64,34 @@ export async function POST(req: NextRequest) {
 			hear_about,
 		};
 
-        const resend = new Resend(apiKey);
-        const plain = buildTextEmail(payload);
-        const minimalHtml = `<html><body style="margin:0;background:#ffffff;color:#000000;"><pre style="margin:0;padding:16px;background:#ffffff;color:#000000;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;white-space:pre-wrap;line-height:1.5;">${plain
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")}</pre></body></html>`;
+		const resend = new Resend(apiKey);
+		const plain = buildTextEmail(payload);
+
+		function escapeHtml(input: string): string {
+			return input
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;")
+				.replace(/'/g, "&#39;");
+		}
+
+		const fullNameHtml = escapeHtml([payload.first_name, payload.last_name].filter(Boolean).join(" ") || "-");
+		const emailHtml = escapeHtml(payload.email || "-");
+		const phoneHtml = escapeHtml(payload.phone || "-");
+		const trafficHtml = escapeHtml(payload.avg_monthly_traffic || "-");
+		const heardHtml = escapeHtml(payload.hear_about || "-");
+		const websiteDisplay = escapeHtml(payload.website || "-");
+		const websiteHref = payload.website ? payload.website : "#";
+
+		const minimalHtml = `<!doctype html><html><body style="margin:0;padding:16px;background:#ffffff;color:#000000;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5;">
+			<p style="margin:0 0 12px 0;color:#000000;">New demo request from <strong style="color:#000000;">${fullNameHtml}</strong></p>
+			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Email:</span> <span style="font-weight:400;color:#000000;">${emailHtml}</span></p>
+			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Phone:</span> <span style="font-weight:400;color:#000000;">${phoneHtml}</span></p>
+			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Website:</span> ${payload.website ? `<a href="${websiteHref}" target="_blank" rel="noopener noreferrer" style="color:#000000;text-decoration:underline;">${websiteDisplay}</a>` : `<span style="font-weight:400;color:#000000;">-</span>`}</p>
+			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Avg monthly traffic:</span> <span style="font-weight:400;color:#000000;">${trafficHtml}</span></p>
+			<p style="margin:0;color:#000000;"><span style="font-weight:600;color:#000000;">Heard about us:</span> <span style="font-weight:400;color:#000000;">${heardHtml}</span></p>
+		</body></html>`;
         const sendResult = await resend.emails.send({
 			from: fromAddress,
             to: toAddress,
