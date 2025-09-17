@@ -84,14 +84,29 @@ export async function POST(req: NextRequest) {
 		const websiteDisplay = escapeHtml(payload.website || "-");
 		const websiteHref = payload.website ? payload.website : "#";
 
-		const minimalHtml = `<!doctype html><html><body style="margin:0;padding:16px;background:#ffffff;color:#000000;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5;">
-			<p style="margin:0 0 12px 0;color:#000000;">New demo request from <strong style="color:#000000;">${fullNameHtml}</strong></p>
-			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Email:</span> <span style="font-weight:400;color:#000000;">${emailHtml}</span></p>
-			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Phone:</span> <span style="font-weight:400;color:#000000;">${phoneHtml}</span></p>
-			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Website:</span> ${payload.website ? `<a href="${websiteHref}" target="_blank" rel="noopener noreferrer" style="color:#000000;text-decoration:underline;">${websiteDisplay}</a>` : `<span style="font-weight:400;color:#000000;">-</span>`}</p>
-			<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Avg monthly traffic:</span> <span style="font-weight:400;color:#000000;">${trafficHtml}</span></p>
-			<p style="margin:0;color:#000000;"><span style="font-weight:600;color:#000000;">Heard about us:</span> <span style="font-weight:400;color:#000000;">${heardHtml}</span></p>
-		</body></html>`;
+		const minimalHtml = `<!doctype html>
+		<html>
+		<head>
+			<meta name="color-scheme" content="light">
+			<meta name="supported-color-schemes" content="light">
+		</head>
+		<body style="margin:0;padding:0;background:#ffffff;">
+			<div style="padding:16px;background:#ffffff;color:#000000;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5;">
+				<p style="margin:0 0 12px 0;color:#000000;">New demo request from <strong style="color:#000000;"><font color="#000000">${fullNameHtml}</font></strong></p>
+				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Email:</span> 
+					${payload.email ? `<a href="mailto:${emailHtml}" style="color:#000000;text-decoration:underline;"><span style="color:#000000;"><font color="#000000">${emailHtml}</font></span></a>` : `<span style="font-weight:400;color:#000000;"><font color="#000000">-</font></span>`}
+				</p>
+				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Phone:</span> 
+					${payload.phone ? `<a href="tel:${phoneHtml}" style="color:#000000;text-decoration:underline;"><span style="color:#000000;"><font color="#000000">${phoneHtml}</font></span></a>` : `<span style="font-weight:400;color:#000000;"><font color="#000000">-</font></span>`}
+				</p>
+				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Website:</span> 
+					${payload.website ? `<a href="${websiteHref}" target="_blank" rel="noopener noreferrer" style="color:#000000;text-decoration:underline;"><span style="color:#000000;"><font color="#000000">${websiteDisplay}</font></span></a>` : `<span style="font-weight:400;color:#000000;"><font color="#000000">-</font></span>`}
+				</p>
+				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Avg monthly traffic:</span> <span style="font-weight:400;color:#000000;"><font color="#000000">${trafficHtml}</font></span></p>
+				<p style="margin:0;color:#000000;"><span style="font-weight:600;color:#000000;">Heard about us:</span> <span style="font-weight:400;color:#000000;"><font color="#000000">${heardHtml}</font></span></p>
+			</div>
+		</body>
+		</html>`;
         const sendResult = await resend.emails.send({
 			from: fromAddress,
             to: toAddress,
