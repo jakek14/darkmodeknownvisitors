@@ -82,6 +82,21 @@ export default function BookDemoPage() {
       <div className="pt-20" />
 
       <Section className="pb-8 sm:pb-16">
+        {isSubmitted ? (
+          <div className="max-w-container mx-auto py-24">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-center"
+            >
+              <h3 className="text-3xl sm:text-4xl font-semibold mb-4">Thanks for your interest in KnownVisitors!</h3>
+              <p className="text-lg text-muted-foreground">
+                A member of our team will personally reach out to learn more about your goals and walk you through the platform.
+              </p>
+            </motion.div>
+          </div>
+        ) : (
         <div className="max-w-container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           <div className="space-y-6">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
@@ -92,30 +107,15 @@ export default function BookDemoPage() {
             </p>
           </div>
 
-          {isSubmitted ? (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="flex items-center justify-center text-center py-24"
-            >
-              <div>
-                <h3 className="text-3xl sm:text-4xl font-semibold mb-4">Thanks for your interest in KnownVisitors!</h3>
-                <p className="text-lg text-muted-foreground">
-                  A member of our team will personally reach out to learn more about your goals and walk you through the platform.
-                </p>
-              </div>
-            </motion.div>
-          ) : (
-            <Card className={cn("glass-5 shadow-2xl border-primary/60 bg-card/95 backdrop-blur-xl ring-1 ring-primary/15 dark:ring-white/10 relative overflow-hidden")}> 
-              <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4),_inset_0_1px_0_0_rgba(255,255,255,0.06)]" />
-              <div className="pointer-events-none absolute -top-24 -left-24 w-72 h-72 rounded-full bg-primary/15 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
-              <CardContent className="p-6 relative">
-                <form
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                  onSubmit={handleSubmit}
-                >
+          <Card className={cn("glass-5 shadow-2xl border-primary/60 bg-card/95 backdrop-blur-xl ring-1 ring-primary/15 dark:ring-white/10 relative overflow-hidden")}> 
+            <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4),_inset_0_1px_0_0_rgba(255,255,255,0.06)]" />
+            <div className="pointer-events-none absolute -top-24 -left-24 w-72 h-72 rounded-full bg-primary/15 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
+            <CardContent className="p-6 relative">
+              <form
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                onSubmit={handleSubmit}
+              >
                 <div className="sm:col-span-1">
                   <label className={labelClass}>First Name<span className="text-primary">*</span></label>
                   <input
@@ -219,16 +219,16 @@ export default function BookDemoPage() {
                   </Button>
                 </div>
 
-                  {error && (
-                    <div className="sm:col-span-2 text-sm text-red-500">
-                      {error}
-                    </div>
-                  )}
-                </form>
-              </CardContent>
-            </Card>
-          )}
+                {error && (
+                  <div className="sm:col-span-2 text-sm text-red-500">
+                    {error}
+                  </div>
+                )}
+              </form>
+            </CardContent>
+          </Card>
         </div>
+        )}
       </Section>
 
       <Footer />

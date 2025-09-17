@@ -186,41 +186,7 @@ export default function Hero({
           <p className="text-md animate-appear text-muted-foreground relative z-10 max-w-[740px] font-medium text-balance opacity-0 delay-100 sm:text-xl mb-8">
             KnownVisitors identifies your anonymous website visitors even if they never filled out a form.
           </p>
-          {/* Email Input and Waitlist Button */}
-          <form
-            className="animate-appear relative z-10 flex flex-col sm:flex-row gap-4 max-w-md w-full opacity-0 delay-300"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!isValidEmail(email)) return;
-              handleEmailSubmit();
-            }}
-          >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={isSubmitting || isSubmitted}
-              required
-              inputMode="email"
-              autoComplete="email"
-              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-              className="flex-1 px-4 py-3 bg-background/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#1da84f]/50 focus:border-[#1da84f] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/20 disabled:opacity-50 disabled:cursor-not-allowed"
-            />
-            <Button
-              type="submit"
-              variant="default"
-              size="lg"
-              disabled={isSubmitting || isSubmitted || !email || !isValidEmail(email)}
-              className={`transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1da84f]/30 transform ${
-                isSubmitted 
-                  ? "bg-green-600 hover:bg-green-700 text-white" 
-                  : "bg-[#1da84f] hover:bg-[#1da84f]/90 text-white"
-              } ${(isSubmitting || isSubmitted || !email || !isValidEmail(email)) ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-              {isSubmitting ? "Submitting..." : buttonText}
-            </Button>
-          </form>
+          {/* Removed email capture form */}
           {mockup !== false && (
             <div className="relative w-full pt-8">
               <MockupFrame
