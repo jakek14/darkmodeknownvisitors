@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Footer from "../../components/sections/footer/default";
 import Navbar from "../../components/sections/navbar/default";
 import DarkModeLogo from "../../components/logos/darkmode-logo";
@@ -13,6 +14,65 @@ export default function BookDemoPage() {
   const fieldClass = "w-full h-11 rounded-md border border-input bg-background px-3 outline-none focus:ring-1 focus:ring-ring";
   const labelClass = "block text-base mb-1 font-medium";
   const [traffic, setTraffic] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setIsSubmitted(false);
+    setError(null);
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    const rawWebsite = String(fd.get("website") || "").trim();
+    let normalizedWebsite = rawWebsite;
+    if (normalizedWebsite && !/^https?:\/\//i.test(normalizedWebsite)) {
+      normalizedWebsite = `https://${normalizedWebsite}`;
+    }
+    try {
+      // Validate normalized website
+      if (!normalizedWebsite) throw new Error("missing");
+      // eslint-disable-next-line no-new
+      new URL(normalizedWebsite);
+    } catch {
+      setIsSubmitting(false);
+      setError("Please enter a valid website URL");
+      return;
+    }
+
+    const payload = {
+      first_name: String(fd.get("first_name") || ""),
+      last_name: String(fd.get("last_name") || ""),
+      email: String(fd.get("email") || ""),
+      phone: String(fd.get("phone") || ""),
+      website: normalizedWebsite,
+      avg_monthly_traffic: String(fd.get("avg_monthly_traffic") || ""),
+      hear_about: String(fd.get("hear_about") || ""),
+    };
+
+    try {
+      const res = await fetch("/api/lead-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Failed to submit");
+      }
+      form.reset();
+      setTraffic("");
+      setIsSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <main className="min-h-screen w-full overflow-x-hidden bg-background text-foreground">
       <Navbar
@@ -25,38 +85,43 @@ export default function BookDemoPage() {
         <div className="max-w-container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           <div className="space-y-6">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-              Ready to supercharge your <span className="text-primary">revenue</span>?
+              Turn Anonymous Visitors into <span className="text-primary">Paying Customers</span>
             </h1>
-            <ul className="text-muted-foreground space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="mt-1 size-2 rounded-full bg-primary" />
-                <span>See a tailored demo of our product</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 size-2 rounded-full bg-primary" />
-                <span>Cater a solution to your needs</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 size-2 rounded-full bg-primary" />
-                <span>Get started in as little as 15 minutes</span>
-              </li>
-            </ul>
+            <p className="text-lg text-muted-foreground">
+              Join the fastest-growing brands that use KnownVisitors to identify hidden traffic, capture more leads, and grow revenue — without changing your stack.
+            </p>
           </div>
 
-          <Card className={cn("glass-4 shadow-2xl border-primary/40 bg-card/80 backdrop-blur-md relative overflow-hidden")}> 
-            <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4),_inset_0_1px_0_0_rgba(255,255,255,0.06)]" />
-            <div className="pointer-events-none absolute -top-24 -left-24 w-72 h-72 rounded-full bg-primary/15 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
-            <CardContent className="p-6 relative">
-              <form
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                onSubmit={(e) => e.preventDefault()}
-              >
+          {isSubmitted ? (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="flex items-center justify-center text-center py-24"
+            >
+              <div>
+                <h3 className="text-3xl sm:text-4xl font-semibold mb-4">Thanks for your interest in KnownVisitors!</h3>
+                <p className="text-lg text-muted-foreground">
+                  A member of our team will personally reach out to learn more about your goals and walk you through the platform.
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <Card className={cn("glass-5 shadow-2xl border-primary/60 bg-card/95 backdrop-blur-xl ring-1 ring-primary/15 dark:ring-white/10 relative overflow-hidden")}> 
+              <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4),_inset_0_1px_0_0_rgba(255,255,255,0.06)]" />
+              <div className="pointer-events-none absolute -top-24 -left-24 w-72 h-72 rounded-full bg-primary/15 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
+              <CardContent className="p-6 relative">
+                <form
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                  onSubmit={handleSubmit}
+                >
                 <div className="sm:col-span-1">
                   <label className={labelClass}>First Name<span className="text-primary">*</span></label>
                   <input
                     type="text"
                     required
+                    name="first_name"
                     className={fieldClass}
                     placeholder=""
                   />
@@ -66,6 +131,7 @@ export default function BookDemoPage() {
                   <input
                     type="text"
                     required
+                    name="last_name"
                     className={fieldClass}
                     placeholder=""
                   />
@@ -76,6 +142,7 @@ export default function BookDemoPage() {
                   <input
                     type="email"
                     required
+                    name="email"
                     className={fieldClass}
                     placeholder="you@example.com"
                   />
@@ -84,6 +151,7 @@ export default function BookDemoPage() {
                   <label className={labelClass}>Phone</label>
                   <input
                     type="tel"
+                    name="phone"
                     className={fieldClass}
                     placeholder="(123) 456-7891"
                   />
@@ -92,8 +160,10 @@ export default function BookDemoPage() {
                 <div className="sm:col-span-1">
                   <label className={labelClass}>Website<span className="text-primary">*</span></label>
                   <input
-                    type="url"
+                    type="text"
                     required
+                    name="website"
+                    inputMode="url"
                     className={fieldClass}
                     placeholder="https://example.com"
                   />
@@ -102,6 +172,7 @@ export default function BookDemoPage() {
                   <label className={labelClass}>Avg. Monthly Traffic</label>
                   <div className="relative">
                     <select
+                      name="avg_monthly_traffic"
                       className={cn(fieldClass, "appearance-none pr-10", traffic ? "text-foreground" : "text-muted-foreground")}
                       value={traffic}
                       onChange={(e) => setTraffic(e.target.value)}
@@ -136,19 +207,27 @@ export default function BookDemoPage() {
                   <label className={labelClass}>How Did You Hear About Us? <span className="text-muted-foreground">(optional)</span></label>
                   <textarea
                     rows={4}
+                    name="hear_about"
                     className="w-full rounded-md border border-input bg-background px-3 py-2 outline-none focus:ring-1 focus:ring-ring"
                     placeholder="e.g., Google, LinkedIn, referral, podcast, event, other"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full h-16 rounded-xl text-xl font-bold">
-                    Book a demo
+                  <Button type="submit" disabled={isSubmitting || isSubmitted} className="w-full h-16 rounded-xl text-xl font-bold disabled:opacity-60 disabled:cursor-not-allowed">
+                    {isSubmitting ? "Sending..." : isSubmitted ? "Sent!" : "Book a demo"}
                   </Button>
                 </div>
-              </form>
-            </CardContent>
-          </Card>
+
+                  {error && (
+                    <div className="sm:col-span-2 text-sm text-red-500">
+                      {error}
+                    </div>
+                  )}
+                </form>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </Section>
 
