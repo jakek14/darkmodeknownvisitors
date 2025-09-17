@@ -37,7 +37,7 @@ export default function Navbar({
   const actionsToShow: NavbarActionProps[] = actions.length
     ? actions
     : [
-        { text: "Book Demo", href: "/demo", isButton: true, variant: "default" },
+        { text: "Book Demo", href: "/book-demo", isButton: true, variant: "default" },
       ];
 
   return (
