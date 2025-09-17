@@ -25,18 +25,6 @@ function buildTextEmail(payload: Record<string, string>) {
 	return lines.join("\n");
 }
 
-function buildMinimalHtmlEmail(payload: Record<string, string>) {
-    const fullName = [payload.first_name, payload.last_name].filter(Boolean).join(" ");
-    return `<!doctype html><html><body style="margin:0;padding:16px;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5;">
-        <p style="margin:0 0 12px 0;">New demo request from <strong>${fullName || "-"}</strong></p>
-        <p style="margin:0 0 6px 0;"><span style="font-weight:600;">Email:</span> <span style="font-weight:400;">${payload.email || "-"}</span></p>
-        <p style="margin:0 0 6px 0;"><span style="font-weight:600;">Phone:</span> <span style="font-weight:400;">${payload.phone || "-"}</span></p>
-        <p style="margin:0 0 6px 0;"><span style="font-weight:600;">Website:</span> ${payload.website ? `<a href="${payload.website}" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;color:inherit;">${payload.website}</a>` : "-"}</p>
-        <p style="margin:0 0 6px 0;"><span style="font-weight:600;">Avg monthly traffic:</span> <span style="font-weight:400;">${payload.avg_monthly_traffic || "-"}</span></p>
-        <p style="margin:0;"><span style="font-weight:600;">Heard about us:</span> <span style="font-weight:400;">${payload.hear_about || "-"}</span></p>
-    </body></html>`;
-}
-
 // removed obfuscation helper (not used)
 
 export async function POST(req: NextRequest) {

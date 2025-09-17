@@ -1,9 +1,9 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 
-import { Button, type ButtonProps } from "../../ui/button";
+import type { ButtonProps } from "../../ui/button";
 import { HeroMemberList } from "../../ui/hero-member-list";
 import { Mockup, MockupFrame } from "../../ui/mockup";
 import { Section } from "../../ui/section";
@@ -28,126 +28,15 @@ interface HeroProps {
   className?: string;
 }
 
-type LeadSubmissionEvent = {
-  event: string;
-  form_id: string;
-  email: string;
-  response_status: number;
-  response_status_text: string;
-  page_location: string;
-  page_path: string;
-  page_title: string;
-  timestamp: string;
-};
-
-interface WindowWithDataLayer extends Window {
-  dataLayer?: LeadSubmissionEvent[];
-}
-
 export default function Hero({
   mockup = <HeroMemberList />,
   badge = false,
   className,
 }: HeroProps) {
   const words = ["Sales", "Leads", "Revenue", "Buyers", "Users"];
-  const [email, setEmail] = useState("");
-  const [buttonText, setButtonText] = useState("Join the Waitlist");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // Removed waitlist form; keep minimal state only if needed in future
 
-  const isValidEmail = (value: string) => {
-    const v = value.trim();
-    // Basic validation: requires one "@" and at least one "." after the "@"
-    // Example: something@domain.tld
-    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
-  };
-
-  const handleEmailSubmit = async () => {
-    if (isSubmitting) return;
-    const submittedEmail = email.trim();
-    if (!isValidEmail(submittedEmail)) {
-      setButtonText("Enter a valid email");
-      setTimeout(() => {
-        setButtonText("Join the Waitlist");
-      }, 2000);
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    try {
-      console.log('Submitting email:', email);
-
-      const response = await fetch("https://sheetdb.io/api/v1/ospfsyvgjb57s", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: submittedEmail
-        }),
-      });
-
-      console.log('Response status:', response.status);
-      console.log('Response status text:', response.statusText);
-
-      if (response.ok) {
-        const responseText = await response.text();
-        console.log('Response body:', responseText);
-        
-        try {
-          if (typeof window !== "undefined") {
-            const w = window as WindowWithDataLayer;
-            w.dataLayer = w.dataLayer ?? [];
-            w.dataLayer.push({
-              event: 'lead_submission',
-              form_id: 'hero_waitlist',
-              email: submittedEmail,
-              response_status: response.status,
-              response_status_text: response.statusText,
-              page_location: window.location.href,
-              page_path: window.location.pathname,
-              page_title: document.title,
-              timestamp: new Date().toISOString(),
-            });
-          }
-        } catch {}
-        
-        setButtonText("Thank you!");
-        setIsSubmitted(true);
-        setEmail("");
-        // Reset button text after 3 seconds
-        setTimeout(() => {
-          setButtonText("Join the Waitlist");
-          setIsSubmitted(false);
-        }, 3000);
-      } else {
-        const errorText = await response.text();
-        console.error("Failed to submit email:", response.status, response.statusText, errorText);
-        
-        // Handle specific error cases
-        if (response.status === 400) {
-          setButtonText("Setup Required");
-          setTimeout(() => {
-            setButtonText("Join the Waitlist");
-          }, 3000);
-        } else {
-          setButtonText("Try Again");
-          setTimeout(() => {
-            setButtonText("Join the Waitlist");
-          }, 2000);
-        }
-      }
-    } catch (error) {
-      console.error("Error submitting email:", error);
-      setButtonText("Try Again");
-      setTimeout(() => {
-        setButtonText("Join the Waitlist");
-      }, 2000);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  // Removed waitlist submit handler entirely
 
   // Form submission is handled via onSubmit to ensure consistent validation on Enter or click
 
