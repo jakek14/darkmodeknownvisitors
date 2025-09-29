@@ -5,6 +5,9 @@ import path from "path";
 import fs from "fs/promises";
 import { marked } from "marked";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function TermsOfUsePage() {
   const candidates = [
     "KnownVisitors_Terms_of_Service.md",
