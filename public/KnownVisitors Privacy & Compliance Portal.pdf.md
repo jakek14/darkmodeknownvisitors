@@ -4,21 +4,6 @@
 
 At KnownVisitors, we are committed to a privacy-first approach in delivering our audience identification services. Our platform helps businesses **identify** **anonymous** **website** **visitors** and turn them into known customers for marketing and analytics, all while adhering to applicable privacy regulations. Below we outline how KnownVisitors complies with major privacy laws and what this means for our clients and consumers.
 
-**· CAN-SPAM (Email Marketing)**
-
-**·Telephone Consumer Protection Act (TCPA)**
-
-**·California Privacy Laws (CCPA/CPRA)**
-
-**· Colorado Privacy Act (CPA)**
-
-**·Virginia Consumer Data Protection Act (CDPA)**
-
-**·Other U.S. State Privacy Laws**
-
-**·International Laws (GDPR, CASL,etc.)**
-
-**·Consumer Opt-Out & Data Rights**
 
 **Disclaimer**: This summary is intended for informational purposes only and **does** **not** **constitute** **legal** **advice.** It is not an exhaustive list of all requirements, and businesses should consult legal counsel for advice on specific compliance questions.
 
@@ -26,7 +11,7 @@ At KnownVisitors, we are committed to a privacy-first approach in delivering our
 
 # CAN-SPAM (U.S. Email Marketing Law)
 
-The **Controlling the Assault of Non-Solicited Pornography And Marketing Act (CAN-SPAM)** sets the rules for commercial emails in the United States. **CAN-SPAM** **compliance** is crucial when using KnownVisitors to collect emails and send marketing messages.Key points include:
+The **Controlling the Assault of Non-Solicited Pornography And Marketing Act (CAN-SPAM)** sets the rules for commercial emails in the United States. **CAN-SPAM** **compliance** is crucial when using KnownVisitors to collect emails and send marketing messages. Key points include:
 
 **·No** **Illegal** **Email** **Harvesting:** CAN-SPAM prohibits harvesting email addresses from websites that publish a notice prohibiting such collection. KnownVisitors does not collect or provide emails from any source that violates this rule. We ensure our data sources are compliant and expect our clients to only use KnownVisitors on websites where email collection is permitted.
 
@@ -58,9 +43,7 @@ consent and honoring opt-outs, you can leverage KnownVisitors data for calls/SMS
 
 **·Notice & Transparency:** California law requires businesses to **disclose their data** **collection** **and** **usage** **practices** in a privacy notice. If you use KnownVisitors on your site, your **Privacy** **Policy** **must** **clearly** **state** that you utilize a third-party service to collect personal identifiers (like emails or phone numbers) from visitors for marketing purposes. You should describe the categories of personal information collected, the purpose (e.g. retargeting marketing emails/ads), and the categories of third parties with whom it's shared (for example, “We use a visitor identification service (KnownVisitors) which collects contact information of our site visitors and shares it with us to facilitate our marketing efforts"). We have provided sample language to clients for this disclosure, and we encourage reviewing CPRA's specific notice requirements.
 
-**· Consumer Rights Requests:** California residents can request that you **delete their** **personal** **data,** or disclose what you've collected about them, among other rights. If you receive a **deletion** **request** from a California user and it pertains to data identified via KnownVisitors, you are responsible for fulfilling it (which may involve deleting the data from your own systems and notifying us, so we can remove it from our systems as well). KnownVisitors will cooperate with such requests - if an individual contacts us directly to opt-out of our database or delete their information, we **will** **honor** **that** **request** and suppress or remove their data. We also provide tools for clients to suppress certain contacts (for example, if a user
-
-exercised their CCPA rights with you, you can ensure our pixel does not re-identify them).
+**· Consumer Rights Requests:** California residents can request that you **delete their** **personal** **data,** or disclose what you've collected about them, among other rights. If you receive a **deletion** **request** from a California user and it pertains to data identified via KnownVisitors, you are responsible for fulfilling it (which may involve deleting the data from your own systems and notifying us, so we can remove it from our systems as well). KnownVisitors will cooperate with such requests - if an individual contacts us directly to opt-out of our database or delete their information, we **will** **honor** **that** **request** and suppress or remove their data. We also provide tools for clients to suppress certain contacts (for example, if a user exercised their CCPA rights with you, you can ensure our pixel does not re-identify them).
 
 **·Non-Discrimination**: The CCPA/CPRA prohibits discriminating against consumers for exercising their privacy rights. This means you cannot deny services, or provide different quality of service or pricing, just because someone opted out of sale/sharing or requested deletion. Ensure your marketing practices via KnownVisitors do not disadvantage users who have exercised a "Do Not Sell/Share"choice.
 
@@ -146,7 +129,5 @@ individuals stay excluded. (Clients: we make this opt-out link available for you
 
 **In** **essence,** KnownVisitors aims to balance effective marketing with consumer privacy rights. We provide the necessary tools (opt-outs, contractual assurances, compliance guides) to use our platform in a way that **meets** **all** **major** **privacy** **regulations** while still driving growth for your business. By integrating these compliance practices into your use of KnownVisitors, you can turn anonymous visitors into loyal customers in a lawful and privacy-respecting way.
 
-If you have any questions about privacy or compliance in using KnownVisitors, please **contact** **our** **compliance** **team.** We also have external privacy counsel available to assist with any complex questions your legal team might have. KnownVisitors is committed to working with our clients and regulators to ensure that our audience identification
-
-technology is deployed responsibly, ethically, and in full compliance with the evolving landscape of data privacy laws.
+If you have any questions about privacy or compliance in using KnownVisitors, please **contact** **our** **compliance** **team.** We also have external privacy counsel available to assist with any complex questions your legal team might have. KnownVisitors is committed to working with our clients and regulators to ensure that our audience identification technology is deployed responsibly, ethically, and in full compliance with the evolving landscape of data privacy laws.
 
