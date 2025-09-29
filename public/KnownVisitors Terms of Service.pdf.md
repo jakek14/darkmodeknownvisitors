@@ -6,37 +6,12 @@
 
 Last Updated: September 3, 2025 (Effective for all users upon posting)
 
-Welcome to KnownVisitors! These Terms of Service (these "Terms") govern your access to and use of the KnownVisitors website and all related products and services provided by KnownVisitors (collectively, the $"Services")$ ). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree,you muust not use the Services.
+Welcome to KnownVisitors! These Terms of Service (these "Terms") govern your access to and use of the KnownVisitors website and all related products and services provided by KnownVisitors (collectively, the "Services") ). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree,you muust not use the Services.
 
-These Terms form a binding legal agreement between KnownVisitors, Inc. (referred to as "KnownVisitors," $"we,""us,"$ or "our") and you, the user of the Services (referred to as"you" or "Customer" or "Client" if you register for ourServices). They apply to all users, including visitors to our website and customers who register for our software-as-a-service platform. Certain provisions herein apply specifically to customers who subscribe to KnownVisitors' Services (see Section 5 and onward), but all users are responsible for complying with the Terms when using any part of the Services.
+These Terms form a binding legal agreement between KnownVisitors, Inc. (referred to as "KnownVisitors," "we,""us," or "our") and you, the user of the Services (referred to as"you" or "Customer" or "Client" if you register for ourServices). They apply to all users, including visitors to our website and customers who register for our software-as-a-service platform. Certain provisions herein apply specifically to customers who subscribe to KnownVisitors' Services (see Section 5 and onward), but all users are responsible for complying with the Terms when using any part of the Services.
 
 Please read these Terms carefully and ensure you understand them. We have organized them into sections for easier reading:
 
-·Description of Services
-
-·Account Registration and Security
-
-·Subscription Plans, Fees, and Payment
-
-·Client Obligations and Acceptable Use
-
-·Intellectual Property Rights
-
-·Privacy and Data Protection
-
-·Warranties and Disclaimers
-
-·Limitation of Liability
-
-· Indemnification
-
-·Termination and Suspension
-
-·Governing Law and Dispute Resolution
-
-·Changes to the Terms
-
-· Miscellaneous
 
 # 1. Description of Services
 
@@ -110,7 +85,7 @@ Our fees are exclusive of taxes. Where applicable, we will charge sales, use, va
 
 ## 3.7 Invoices and Billing
 
-We will typically charge your provided payment method automatically. You may receive an electronic receipt or invoice by email. All payments are duue immediately upon invoice. If we agree to invoice you with net payment terms (for certain approved business customers), you shall pay all invoiced amounts within the specified time (e.g. net 30 days). Late payments may incur interest at the rate of 1.5% per month (or the highest rate allowed by law, if lower), and we reserve the right to suspend or terminate your account for failure to pay timely.
+We will typically charge your provided payment method automatically. You may receive an electronic receipt or invoice by email. All payments are duue immediately upon invoice. If we agree to invoice you with net payment terms (for certain approved business customers), you shall pay all invoiced amounts within the specified time (e.g. net 30 days). Late payments may incur interest, and we reserve the right to suspend or terminate your account for failure to pay timely.
 
 ## 3.8 Cancellation by You
 
@@ -146,9 +121,9 @@ You are responsible for properly implementing the KnownVisitors tracking code (p
 
 <!-- **4.4 Compliance with Laws and Acceptable Use** -->
 
-You agree to use the Services and any data obtained from us only for lawful purposes and in a lawful manner. You are solely responsible for ensuring that yyour use of KnownVisitors (and the Visitor Data)complies with all applicable laws, regulations, and industry guidelines, including but not limited to:
+You agree to use the Services and any data obtained from us only for lawful purposes and in a lawful manner. You are solely responsible for ensuring that your use of KnownVisitors (and the Visitor Data)complies with all applicable laws, regulations, and industry guidelines, including but not limited to:
 
-**·Privacy** **and** **Data** **Protection** **Laws**: You must comply with alI relevant privacy laws when using our Services and handling Visitor Data. This includes laws such as the CAN-SPAM Act (for email marketing), the Telephone Consumer Protection Act (TCPA) and "Do Not Call" laws (for telemarketing/SMS outreach), and any other federal or state laws regarding email, text, or phone marketing. You also agree to adhere to applicable Data & Marketing Association (DMA) guidelines for direct marketing. If you are subject to certain state privacy laws (for example, California's laws like CCPA/CPRA) or sector-specific laws (like HIPAA for health data) in your use of the data, you are responsible for complying with those as well. Do not use KnownVisitors to collect or attempt to collect sensitive personal information (such as financial, health, or children's data) unless you have legal authority and appropriate safeguards in place.
+**·Privacy** **and** **Data** **Protection** **Laws**: You must comply with all relevant privacy laws when using our Services and handling Visitor Data. This includes laws such as the CAN-SPAM Act (for email marketing), the Telephone Consumer Protection Act (TCPA) and "Do Not Call" laws (for telemarketing/SMS outreach), and any other federal or state laws regarding email, text, or phone marketing. You also agree to adhere to applicable Data & Marketing Association (DMA) guidelines for direct marketing. If you are subject to certain state privacy laws (for example, California's laws like CCPA/CPRA) or sector-specific laws (like HIPAA for health data) in your use of the data, you are responsible for complying with those as well. Do not use KnownVisitors to collect or attempt to collect sensitive personal information (such as financial, health, or children's data) unless you have legal authority and appropriate safeguards in place.
 
 **·No** **Illegal** **Content** **or** **Purposes**: You will not use the Services to identify or contact visitors for any illegal or fraudulent purpose, or in connection with any material that is illegal. For example, you may not use our Service to target individuals in order to send defamatory, obscene, threatening, or harassing messages, or to facilitate any unlawful activities. You also agree not to use KnownVisitors to promote or sell any goods or services that are illegal in the United States or in any jurisdiction where the targeted individuals reside.
 
@@ -170,7 +145,7 @@ If you violate any of the above restrictions or any other provision of these Ter
 
 As a Client, you have certain obligations to your own website visitors regarding transparency and choice:
 
-**·Privacy** **Policy** **Disclosure:** You must publish and maintain a clear Privacy Policy on any website where you use the KnownVisitors pixel or Services. This Privacy Policy must disclose that you are using third-party technology to collect information about visitors for marketing purposes.Specifically, you should inform users that your site employs tracking technologies (such as cookies,pixel tags, and similar code) that may collect personal information, and that you use a service (like KnownVisitors) to identify visitors or send them marketing communications. For example, your privacy notice can include a statement such as: "Our site uses a visitor identification service that utilizes cookies and other tracking techniques to identify and collect contact information for visitors to our site. We may use this information to reach out to visitors with marketing communications about our products and services." (Ensure the language fits your actual use case. We recommend including any specific sample language we've provided, or a substantially similar disclosure, to meet this requirement.)
+**·Privacy** **Policy** **Disclosure:** This Privacy Policy must disclose that you are using third-party technology to collect information about visitors for marketing purposes. Specifically, you should inform users that your site employs tracking technologies (such as cookies,pixel tags, and similar code) that may collect personal information, and that you use a service (like KnownVisitors) to identify visitors or send them marketing communications. For example, your privacy notice can include a statement such as: "Our site uses a visitor identification service that utilizes cookies and other tracking techniques to identify and collect contact information for visitors to our site. We may use this information to reach out to visitors with marketing communications about our products and services." (Ensure the language fits your actual use case. We recommend including any specific sample language we've provided, or a substantially similar disclosure, to meet this requirement.)
 
 **·Consent and** **Opt-Out** **(if** **required)**: Under U.S. law, explicit opt-in consent for tracking is generally not mandated (aside from certain contexts like telephone/text communications which require consent). However, if you have visitors from jurisdictions that do require consent for tracking (for example, the European Union or other regions with cookie consent laws), you agree that you will provide appropriate notice and obtain any required consents from those users before deploying the KnownVisitors tracking pixel. You should not use KnownVisitors for users who have not given consent in regions where such consent is legally required. Additionally, your website should offer users the ability to opt out of having their personal data collected and used (for instance, by honoring browser Do-Not-Track signals or offering an opt-out link in your privacy policy) if required by law. For email communications, you agree to include unsubscribe mechanisms as required by CAN-SPAM.
 
@@ -428,8 +403,13 @@ The section headings in these Terms are for convenience only and have no legal e
 
 ## 13.10 Contact Information
 
-If you have any questions about these Terms or need to contact KnownVisitors for any reason, please email us at support@knownvisitors.com or write to us at KnownVisitors, Inc., [Business Address], USA.
+If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us. We are here to help and will respond as promptly as we can.
 
+**Email**: support@knownvisitors.com
+
+**Mail**: KnownVisitors, Inc., 2359 Route 33, Robbinsville, NJ 08691
+
+If you have any questions about these Terms or need to contact KnownVisitors for any reason, please email us at support@knownvisitors.com.
 <!-- 17 -->
 
 By using KnownVisitors' Services, you acknowledge that you have read, understood, and agree to these Terms of Service. If you do not agree with any part of these Terms, you must not use or access the Services.Thank you for using KnownVisitors!

@@ -1,12 +1,11 @@
 <!--  -->
 
-<!-- **ChatGPT** -->
 
 # KnownVisitors Privacy Policy
 
 # Last Updated: September 3, 2025
 
-KnownVisitors, Inc. (referred to as "KnownVisitors," $"we,"$ $"us,"$ or $"our"$  is committed to protecting your privacy and handling personal information with care and respect. This Privacy Policy explains how we collect, use, and share information - including personally identifiable information ("Personal Information") -from users of and visitors to the KnownVisitors website and any related online services or applications (collectively, the "Services"). This Policy applies to Personal Information collected through our Services and does not apply to information collected by any third parties or through other means. For purposes of this Policy, "Personal Information" means information that identifies a particular individual, such as name,postal address, email address, or phone number. This Policy also describes your rights and choices regarding your Personal Information. We do not control the privacy practices of our clients or other third parties who may use our Services on their websites, so their activities are not covered by this Policy.
+KnownVisitors, Inc. (referred to as "KnownVisitors," "we," "us," or "our"  is committed to protecting your privacy and handling personal information with care and respect. This Privacy Policy explains how we collect, use, and share information - including personally identifiable information ("Personal Information") -from users of and visitors to the KnownVisitors website and any related online services or applications (collectively, the "Services"). This Policy applies to Personal Information collected through our Services and does not apply to information collected by any third parties or through other means. For purposes of this Policy, "Personal Information" means information that identifies a particular individual, such as name,postal address, email address, or phone number. This Policy also describes your rights and choices regarding your Personal Information. We do not control the privacy practices of our clients or other third parties who may use our Services on their websites, so their activities are not covered by this Policy.
 
 # Collection of Personal Information
 
@@ -78,11 +77,11 @@ We may remove or anonymize certain elements of your Personal Information so that
 
 # Data Sharing and Disclosure
 
-We are not in the business of selling or renting your information to unrelated parties for their own use.However, we do share Personal Information in the following circumstances in order to operate our business and provide our Services:
+We are not in the business of selling or renting your information to unrelated parties for their own use. However, we do share Personal Information in the following circumstances in order to operate our business and provide our Services:
 
 **·With** **Our** **Clients**: KnownVisitors provides a visitor intelligence and identification service. This means that if you are a visitor to one of our client's websites, the very purpose of our Service is to share information about you with that client (the website owner) to help them identify and understand their visitors. For example, if our tracking pixel collects your browsing activity on a client's site and our systems determine your email or other contact info (from our databases or partners), that Visitor Data will be made available to that client through our dashboard or via an integration. In essence,we act as a service provider to our clients, processing and delivering Personal Information about their site visitors on their behalf. We license such Visitor Data to the client for their internal marketing and analytics use. **Important**: Our clients are independently responsible for handling the Visitor Data we provide to them in accordance with applicable laws. (For example, they may need to disclose in their own privacy policies that they use a service like KnownVisitors to collect and identify visitor data.) If you have questions about how a particular website uses the information obtained through KnownVisitors, you should review that website's privacy policy or contact them directly.
 
-**·With** **Service** **Providers** **(Processors)**: We share Personal Information with trusted third-party vendors and service providers who perform services for us or on our behalf under strict confidentiality agreements. These third parties assist us with various business operations, such as:hosting our databases and infrastructure; sending out newsletters or transactional communications;processing payments; providing customer support tools; performing data analytics; or assisting in marketing efforts. For example, if you sign up for text message alerts, we may use an SMS delivery provider to send those messages (and in doing so we would provide your phone number to that provider). Similarly, if you click a link in one of our marketing emails, it may redirect through our email vendor's system to log the click. These service providers are authorized to use your information only as necessary to provide services to KnownVisitors (not for their own independent purposes), and they are required to protect your information in accordance with our instructions and applicable laws.
+**·With** **Service** **Providers** **(Processors)**: We share Personal Information with trusted third-party vendors and service providers who perform services for us or on our behalf under strict confidentiality agreements. These third parties assist us with various business operations, such as:hosting our databases and infrastructure; sending out newsletters or transactional communications; processing payments; providing customer support tools; performing data analytics; or assisting in marketing efforts. For example, if you sign up for text message alerts, we may use an SMS delivery provider to send those messages (and in doing so we would provide your phone number to that provider). Similarly, if you click a link in one of our marketing emails, it may redirect through our email vendor's system to log the click. These service providers are authorized to use your information only as necessary to provide services to KnownVisitors (not for their own independent purposes), and they are required to protect your information in accordance with our instructions and applicable laws.
 
 <!-- 4 -->
 
@@ -124,7 +123,7 @@ Keep in mind that KnownVisitors does not respond to "Do Not Track" signals emitt
 
 # State Privacy Rights
 
-Residents of certain U.S. states have additional rights regarding their personal information, which we honor in accordance with applicable state laws. The following states (now or in the near future) grant residents specific privacy rights**: California, Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Montana,Oregon,** **Tennessee,** **Texas,** **Utah,** **and** **Virginia.** Subject to specific terms and exceptions in each law,individuals in these states can:
+Residents of certain U.S. states have additional rights regarding their personal information, which we honor in accordance with applicable state laws. The following states (now or in the near future) grant residents specific privacy rights**: California, Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Montana, Oregon, Tennessee, Texas, Utah, and Virginia. Subject to specific terms and exceptions in each law,individuals in these states can:
 
 **·Confirm** **processing**: Confirm whether we are processing their personal information.
 
@@ -154,7 +153,7 @@ Some federal or state laws may allow you to request that we limit certain uses o
 
 We take the security of your Personal Information seriously and implement reasonable security measures designed to protect it from unauthorized access, disclosure, alteration, or destruction. For example, we use technical safeguards such as encryption (including TLS/SSL encryption for data transmission) for our website and applications. We also maintain administrative and physical safeguards, limit access to personal data to authorized personnel and contractors, and train our staff on data security practices.
 
-However, no method of transmission over the Internet or method of electronic storage is 100% secure.Therefore, while we strive to protect your information, we cannot guarantee absolute security. Please be aware that email communications you send to us may not be encrypted, so we advise you not to include sensitive personal information in any emails you send. If we become aware of a data breach affecting your Personal Information, we will notify you and/or the appropriate regulatory authorities as required by law.
+However, no method of transmission over the Internet or method of electronic storage is 100% secure. Therefore, while we strive to protect your information, we cannot guarantee absolute security. Please be aware that email communications you send to us may not be encrypted, so we advise you not to include sensitive personal information in any emails you send. If we become aware of a data breach affecting your Personal Information, we will notify you and/or the appropriate regulatory authorities as required by law.
 
 # International Users and Data Transfers
 
@@ -178,9 +177,9 @@ Please review this Privacy Policy periodically to stay informed about how we are
 
 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us. We are here to help and will respond as promptly as we can.
 
-**Email**: privacy@knownvisitors.com
+**Email**: support@knownvisitors.com
 
-**Mail**: KnownVisitors, Inc. - Privacy Department, [Mailing Address], USA
+**Mail**: KnownVisitors, Inc., 2359 Route 33, Robbinsville, NJ 08691
 
 Please note that for certain privacy requests (such as accessing or deleting your data), we may need to verify your identity and residency. If you are contacting us to exercise state-specific rights, please mention which state you are from so we can direct your request appropriately.
 

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+// Expect these env vars to be configured
+// SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LEAD_INBOX_TO, LEAD_INBOX_FROM (optional)
 
 function getRequiredEnv(name: string): string {
 	const val = process.env[name];
@@ -10,22 +10,26 @@ function getRequiredEnv(name: string): string {
 	return val;
 }
 
-// removed old HTML table builder
-
-function buildTextEmail(payload: Record<string, string>) {
-	const lines: string[] = [];
-	const fullName = [payload.first_name, payload.last_name].filter(Boolean).join(" ");
-	lines.push(`New demo request from ${fullName}`);
-	lines.push("");
-	lines.push(`Email: ${payload.email || "-"}`);
-	lines.push(`Phone: ${payload.phone || "-"}`);
-	lines.push(`Website: ${payload.website || "-"}`);
-	lines.push(`Avg monthly traffic: ${payload.avg_monthly_traffic || "-"}`);
-	lines.push(`Heard about us: ${payload.hear_about || "-"}`);
-	return lines.join("\n");
+function buildHtmlEmail(payload: Record<string, string>) {
+	const rows = Object.entries(payload)
+		.map(([key, value]) => {
+			const label = key
+				.replace(/_/g, " ")
+				.replace(/\b\w/g, (m) => m.toUpperCase());
+			return `<tr><td style="padding:8px 12px;background:#0b0b0b;border-bottom:1px solid #1f1f1f;color:#cfcfcf;white-space:nowrap;">${label}</td><td style="padding:8px 12px;background:#0f0f0f;border-bottom:1px solid #1f1f1f;color:#ffffff;">${value || "-"}</td></tr>`;
+		})
+		.join("");
+	return `<!doctype html><html><body style="margin:0;background:#0a0a0a;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;">
+		<table cellpadding="0" cellspacing="0" width="100%" style="max-width:720px;margin:24px auto;border:1px solid #1f1f1f;border-radius:12px;overflow:hidden;background:#0f0f10;">
+			<thead>
+				<tr>
+					<th colspan="2" style="text-align:left;padding:16px 20px;background:#111827;color:#e5e7eb;font-size:18px;">New Demo Request — KnownVisitors</th>
+				</tr>
+			</thead>
+			<tbody>${rows}</tbody>
+		</table>
+	</body></html>`;
 }
-
-// removed obfuscation helper (not used)
 
 export async function POST(req: NextRequest) {
 	try {
@@ -48,12 +52,21 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-		const apiKey = getRequiredEnv("RESEND_API_KEY");
-        const toAddressRaw = getRequiredEnv("LEAD_INBOX_TO");
-        const toAddress = toAddressRaw.split(",").map((s) => s.trim()).filter(Boolean);
-		const fromAddress = process.env.LEAD_INBOX_FROM || "KnownVisitors <demo@knownvisitors.com>";
+		const smtpHost = getRequiredEnv("SMTP_HOST");
+		const smtpPort = Number(getRequiredEnv("SMTP_PORT"));
+		const smtpUser = getRequiredEnv("SMTP_USER");
+		const smtpPass = getRequiredEnv("SMTP_PASS");
+		const toAddress = getRequiredEnv("LEAD_INBOX_TO");
+		const fromAddress = process.env.LEAD_INBOX_FROM || `KnownVisitors Leads <${smtpUser}>`;
 
-		const subject = `New demo request from ${first_name} ${last_name}`;
+		const transporter = nodemailer.createTransport({
+			host: smtpHost,
+			port: smtpPort,
+			secure: smtpPort === 465,
+			auth: { user: smtpUser, pass: smtpPass },
+		});
+
+		const subject = `New Demo Request: ${first_name} ${last_name} — ${website}`;
 		const payload = {
 			first_name,
 			last_name,
@@ -62,63 +75,21 @@ export async function POST(req: NextRequest) {
 			website,
 			avg_monthly_traffic,
 			hear_about,
+			page: req.headers.get("referer") || "",
+			user_agent: req.headers.get("user-agent") || "",
 		};
 
-		const resend = new Resend(apiKey);
-		const plain = buildTextEmail(payload);
-
-		function escapeHtml(input: string): string {
-			return input
-				.replace(/&/g, "&amp;")
-				.replace(/</g, "&lt;")
-				.replace(/>/g, "&gt;")
-				.replace(/"/g, "&quot;")
-				.replace(/'/g, "&#39;");
-		}
-
-		const fullNameHtml = escapeHtml([payload.first_name, payload.last_name].filter(Boolean).join(" ") || "-");
-		const emailHtml = escapeHtml(payload.email || "-");
-		const phoneHtml = escapeHtml(payload.phone || "-");
-		const trafficHtml = escapeHtml(payload.avg_monthly_traffic || "-");
-		const heardHtml = escapeHtml(payload.hear_about || "-");
-		const websiteDisplay = escapeHtml(payload.website || "-");
-		const websiteHref = payload.website ? payload.website : "#";
-
-		const minimalHtml = `<!doctype html>
-		<html>
-		<head>
-			<meta name="color-scheme" content="light">
-			<meta name="supported-color-schemes" content="light">
-		</head>
-		<body style="margin:0;padding:0;background:#ffffff;">
-			<div style="padding:16px;background:#ffffff;color:#000000;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5;">
-				<p style="margin:0 0 12px 0;color:#000000;">New demo request from <strong style="color:#000000;"><font color="#000000">${fullNameHtml}</font></strong></p>
-				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Email:</span> 
-					${payload.email ? `<a href="mailto:${emailHtml}" style="color:#000000;text-decoration:underline;"><span style="color:#000000;"><font color="#000000">${emailHtml}</font></span></a>` : `<span style="font-weight:400;color:#000000;"><font color="#000000">-</font></span>`}
-				</p>
-				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Phone:</span> 
-					${payload.phone ? `<a href="tel:${phoneHtml}" style="color:#000000;text-decoration:underline;"><span style="color:#000000;"><font color="#000000">${phoneHtml}</font></span></a>` : `<span style="font-weight:400;color:#000000;"><font color="#000000">-</font></span>`}
-				</p>
-				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Website:</span> 
-					${payload.website ? `<a href="${websiteHref}" target="_blank" rel="noopener noreferrer" style="color:#000000;text-decoration:underline;"><span style="color:#000000;"><font color="#000000">${websiteDisplay}</font></span></a>` : `<span style="font-weight:400;color:#000000;"><font color="#000000">-</font></span>`}
-				</p>
-				<p style="margin:0 0 6px 0;color:#000000;"><span style="font-weight:600;color:#000000;">Avg monthly traffic:</span> <span style="font-weight:400;color:#000000;"><font color="#000000">${trafficHtml}</font></span></p>
-				<p style="margin:0;color:#000000;"><span style="font-weight:600;color:#000000;">Heard about us:</span> <span style="font-weight:400;color:#000000;"><font color="#000000">${heardHtml}</font></span></p>
-			</div>
-		</body>
-		</html>`;
-        const sendResult = await resend.emails.send({
+		await transporter.sendMail({
 			from: fromAddress,
-            to: toAddress,
+			to: toAddress,
 			subject,
-            html: minimalHtml,
-            text: plain,
-			reply_to: email,
+			html: buildHtmlEmail(payload),
+			text: Object.entries(payload)
+				.map(([k, v]) => `${k}: ${v ?? "-"}`)
+				.join("\n"),
 		});
-		if (sendResult.error) throw new Error(sendResult.error.message || "Resend send error");
-		console.log("Lead email sent", { id: sendResult.data?.id, to: toAddress, from: fromAddress });
 
-		return NextResponse.json({ ok: true, id: sendResult.data?.id });
+		return NextResponse.json({ ok: true });
 	} catch (err) {
 		console.error("Lead email error", err);
 		return NextResponse.json({ error: "Failed to send" }, { status: 500 });

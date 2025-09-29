@@ -81,6 +81,13 @@ export default function FooterSection({
                     >
                       <a href="/privacy">Privacy Policy</a>
                     </Button>
+                    <Button
+                      asChild
+                      variant="link"
+                      className="p-0 h-auto justify-start text-muted-foreground text-sm"
+                    >
+                      <a href="/compliance-portal">Compliance Portal</a>
+                    </Button>
                   </FooterColumn>
                 </div>
               </div>
