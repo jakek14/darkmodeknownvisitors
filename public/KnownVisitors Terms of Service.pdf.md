@@ -4,7 +4,7 @@
 
 # KnownVisitors Terms of Service
 
-Last Updated: September 3, 2025 (Effective for all users upon posting)
+Last Updated: August 15, 2025 (Effective for all users upon posting)
 
 Welcome to KnownVisitors! These Terms of Service (these "Terms") govern your access to and use of the KnownVisitors website and all related products and services provided by KnownVisitors (collectively, the "Services") ). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree,you muust not use the Services.
 
