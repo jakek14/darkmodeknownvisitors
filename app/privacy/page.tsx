@@ -11,6 +11,7 @@ export const revalidate = 0;
 
 export default async function PrivacyPolicyPage() {
   const candidates = [
+    "Privacy Policy.md",
     "KnownVisitors Privacy Policy (2).pdf.md",
     "KnownVisitors Privacy Policy (1).pdf.md",
     "KnownVisitors Privacy Policy.pdf.md",
