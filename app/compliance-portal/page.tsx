@@ -11,6 +11,7 @@ export const revalidate = 0;
 
 export default async function CompliancePortalPage() {
   const candidates = [
+    "KnownVisitors Privacy & Compliance Portal (3).pdf.md",
     "KnownVisitors Privacy & Compliance Portal.pdf.md",
     "Compliance Portal.md",
     "Compliance.md",
