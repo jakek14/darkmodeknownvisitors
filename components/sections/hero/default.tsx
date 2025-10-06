@@ -43,12 +43,12 @@ export default function Hero({
   return (
     <Section
       className={cn(
-        "overflow-hidden pb-0 sm:pb-0 md:pb-0 relative",
+        "overflow-visible pb-0 sm:pb-0 md:pb-0 relative",
         className,
       )}
     >
       {/* Ambient Background Glow */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[800px] bg-gradient-radial from-[#1da84f]/8 via-[#1da84f]/4 to-transparent rounded-full blur-3xl opacity-60" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gradient-radial from-[#1da84f]/6 via-[#1da84f]/3 to-transparent rounded-full blur-2xl opacity-50" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-radial from-[#1da84f]/4 via-[#1da84f]/2 to-transparent rounded-full blur-xl opacity-40" />
@@ -90,7 +90,7 @@ export default function Hero({
                 </Mockup>
               </MockupFrame>
               {/* Enhanced Radial Glow behind image */}
-              <div className="absolute inset-0 pointer-events-none animate-appear-zoom opacity-0 delay-1000">
+              <div className="absolute inset-0 pointer-events-none z-0 animate-appear-zoom opacity-0 delay-1000">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1600px] h-[1000px] bg-gradient-radial from-[#1da84f]/15 via-[#1da84f]/8 to-transparent rounded-full blur-3xl opacity-80" />
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[800px] bg-gradient-radial from-[#1da84f]/12 via-[#1da84f]/6 to-transparent rounded-full blur-2xl opacity-70" />
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gradient-radial from-[#1da84f]/10 via-[#1da84f]/4 to-transparent rounded-full blur-xl opacity-60" />
@@ -99,6 +99,7 @@ export default function Hero({
           )}
         </div>
       </div>
+      {/* Mobile-only overlay removed after overflow fix */}
     </Section>
   );
 }

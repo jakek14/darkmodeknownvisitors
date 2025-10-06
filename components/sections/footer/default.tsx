@@ -40,17 +40,17 @@ export default function FooterSection({
     <footer className={cn("bg-background w-full px-4", className)}>
       <div className="max-w-container mx-auto">
         <Footer className="border-t border-border dark:border-border/15 pt-8 pb-12">
-          <FooterContent className="gap-12 md:gap-14 lg:gap-16">
+          <FooterContent className="gap-12 md:gap-14 lg:gap-16 px-4 sm:px-0">
             <div className="col-span-2 sm:col-span-3 md:col-span-1">
-              <div className="flex flex-col items-start gap-1 pt-0">
+              <div className="flex flex-col items-center sm:items-start gap-1 pt-0">
                 {logo}
-                <div className="text-muted-foreground text-xs leading-tight mt-2 ml-6 sm:ml-10 whitespace-nowrap">
+                <div className="text-muted-foreground text-xs leading-tight mt-2 ml-0 sm:ml-10 whitespace-nowrap text-center sm:text-left">
                   {copyrightText}
                 </div>
               </div>
             </div>
             {/* Group Company and Legal closer together */}
-            <div className="col-span-1 md:col-start-4 md:col-span-1 lg:col-start-5 lg:col-span-1 justify-self-end mr-9">
+            <div className="col-span-1 md:col-start-4 md:col-span-1 lg:col-start-5 lg:col-span-1 justify-self-end mr-0 sm:mr-9">
               <div className="flex flex-col sm:flex-row gap-16 sm:gap-24 md:gap-32">
                 <div>
                   <FooterColumn>
