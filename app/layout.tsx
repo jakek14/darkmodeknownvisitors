@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/Logos_KV-Logo-Square-GreenBG.png",
+        url: "/og-image.png",
         width: 1200,
-        height: 630,
+        height: 628,
         alt: siteConfig.name,
       },
     ],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/Logos_KV-Logo-Square-GreenBG.png"],
+    images: ["/og-image.png"],
     creator: "@mikolajdobrucki",
   },
   other: {
@@ -75,11 +75,11 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en" style={{ colorScheme: "dark" }} className="dark" data-theme="dark">
       <head>
-        <meta property="og:image" content="/Logos_KV-Logo-Square-GreenBG.png" />
+        <meta property="og:image" content="/og-image.png" />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="KnownVisitors Logo" />
-        <meta name="twitter:image" content="/Logos_KV-Logo-Square-GreenBG.png" />
+        <meta property="og:image:height" content="628" />
+        <meta property="og:image:alt" content="KnownVisitors - Uncover Your Most Valuable Web Traffic" />
+        <meta name="twitter:image" content="/og-image.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="KnownVisitors" />
